@@ -19,16 +19,16 @@ public class HibernateConfig {
 
     @Autowired
     private Environment env;
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getRequiredProperty("jdbc.driverClassName"));
-        dataSource.setUrl(env.getRequiredProperty("jdbc.url"));
-        dataSource.setUsername(env.getRequiredProperty("jdbc.username"));
-        dataSource.setPassword(env.getRequiredProperty("jdbc.password"));
-        return dataSource;
-    }
+//
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
+//        dataSource.setUrl(env.getRequiredProperty("db.url"));
+//        dataSource.setUsername(env.getRequiredProperty("db.username"));
+//        dataSource.setPassword(env.getRequiredProperty("db.password"));
+//        return dataSource;
+//    }
 
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
