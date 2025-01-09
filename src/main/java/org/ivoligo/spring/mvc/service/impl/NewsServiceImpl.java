@@ -3,12 +3,14 @@ package org.ivoligo.spring.mvc.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.ivoligo.spring.mvc.model.dto.NewsDto;
+import org.ivoligo.spring.mvc.model.dto.NewsFilter;
 import org.ivoligo.spring.mvc.model.entity.Category;
 import org.ivoligo.spring.mvc.model.entity.News;
 import org.ivoligo.spring.mvc.repository.NewsRepository;
 import org.ivoligo.spring.mvc.service.NewsService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,5 +46,20 @@ public class NewsServiceImpl implements NewsService {
         news.setContent(newsDto.getContent());
         news.setCategory(category);
         newsRepository.save(news);
+    }
+
+    @Override
+    public void update(NewsDto newsDto) {
+
+    }
+
+    @Override
+    public List<NewsDto> find(NewsFilter filter) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void delete(NewsDto newsDto) {
+
     }
 }
