@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
@@ -21,7 +22,7 @@ public class HibernateConfig {
     private Environment env;
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
         dataSource.setUrl(env.getRequiredProperty("db.url"));
@@ -33,6 +34,12 @@ public class HibernateConfig {
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(getDataSource());
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+        hibernateProperties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+        hibernateProperties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        sessionFactory.setHibernateProperties(hibernateProperties);
         sessionFactory.setPackagesToScan(env.getProperty("org.ivoligo.spring.mvc.model.entity"));
         return sessionFactory;
     }
