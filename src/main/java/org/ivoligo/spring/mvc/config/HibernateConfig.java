@@ -14,21 +14,21 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:hibernate.cfg.xml")
+@PropertySource("classpath:db.properties")
 public class HibernateConfig {
 
     @Autowired
     private Environment env;
-//
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
-//        dataSource.setUrl(env.getRequiredProperty("db.url"));
-//        dataSource.setUsername(env.getRequiredProperty("db.username"));
-//        dataSource.setPassword(env.getRequiredProperty("db.password"));
-//        return dataSource;
-//    }
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
+        dataSource.setUrl(env.getRequiredProperty("db.url"));
+        dataSource.setUsername(env.getRequiredProperty("db.username"));
+        dataSource.setPassword(env.getRequiredProperty("db.password"));
+        return dataSource;
+    }
 
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
